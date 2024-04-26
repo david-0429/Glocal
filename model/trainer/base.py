@@ -3,7 +3,7 @@ import os
 import os.path as osp
 
 import torch
-#import wandb
+import wandb
 
 from model.utils.train_utils import Averager, Timer, ensure_path
 
@@ -171,7 +171,7 @@ class Trainer(object, metaclass=abc.ABCMeta):
                 self.save_model('max_auroc')
 
             # wandb log
-            #wandb.log(self.val_log, step=self.train_step)
+            wandb.log(self.val_log, step=self.train_step)
 
     def try_logging(self, l_few, l_open, l_energy, l_all,
                     acc, energy_auroc, logits_auroc, combine_auroc):
@@ -214,7 +214,7 @@ class Trainer(object, metaclass=abc.ABCMeta):
             }
 
             # wandb log
-            #wandb.log(self.train_log, step=self.train_step)
+            wandb.log(self.train_log, step=self.train_step)
 
     def save_model(self, name):
         torch.save(
