@@ -4,7 +4,7 @@ import time
 import numpy as np
 import torch
 import torch.nn.functional as f
-import wandb
+#import wandb
 from tqdm import tqdm
 
 from model.trainer.base import Trainer
@@ -20,7 +20,7 @@ class FSORTrainerGEL(Trainer):
         self.train_loader, self.val_loader, self.test_loader = get_dataloader(args)
         del self.grab_gpu
         self.model = GEL(args)
-        wandb.watch(self.model)
+        #wandb.watch(self.model)
         self.model = prepare_model(args, self.model)
         self.optimizer, self.lr_scheduler = prepare_optimizer(self.model, args)
         self.EnergyLoss = self.model.EnergyLoss
@@ -208,7 +208,7 @@ class FSORTrainerGEL(Trainer):
             file.write(self.test_log_string(result_list))
 
         # wandb log
-        wandb.log(self.test_log)
+        #wandb.log(self.test_log)
 
     def auroc_process(self, bce_score, klogits, ulogits):
         args = self.args
