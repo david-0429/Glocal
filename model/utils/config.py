@@ -1,6 +1,6 @@
 import os
 import time
-#import wandb
+import wandb
 
 
 def set_gpu(x):
@@ -100,14 +100,13 @@ def postprocess_args(args, make_path=True):
         if not os.path.exists(os.path.join(args.save_dir, save_path1)):
             os.mkdir(os.path.join(args.save_dir, save_path1))
     args.save_path = os.path.join(args.save_dir, save_path1, save_path2)
-    '''
+    
     if args.method == "GEL":
-        wandb.init(project="GEL",
-                   entity="0why0",
-                   group=save_path1,
-                   name=save_path2,
-                   tags=[args.dataset],
-                   magic=True)
-        wandb.config.update(args)
-    '''
+        ### wandb init
+        print("wandb init")
+        wandb.init(
+            project=f"FSOR", 
+            name=f"{'FGVC'}_{args.dataset}"
+        )
+    
     return args
