@@ -4,7 +4,7 @@ import time
 import numpy as np
 import torch
 import torch.nn.functional as f
-#import wandb
+import wandb
 from tqdm import tqdm
 
 from model.trainer.base import Trainer
@@ -208,7 +208,7 @@ class FSORTrainerGEL(Trainer):
             file.write(self.test_log_string(result_list))
 
         # wandb log
-        #wandb.log(self.test_log)
+        wandb.log(self.test_log)
 
     def auroc_process(self, bce_score, klogits, ulogits):
         args = self.args
