@@ -2,17 +2,24 @@ import os
 import pickle
 
 import numpy as np
+import torchvision
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset
 
 
 class CifarFs(Dataset):
     def __init__(self, set_name, args, augment=False):
+        '''
         image_path = './data/CIFAR-FS'
         with open(os.path.join(image_path, 'CIFAR_FS_{}.pickle'.format(set_name)), 'rb') as f:
             pack = pickle.load(f, encoding='latin1')
             self.images = pack['data']
             self.label = pack['labels']
+        '''
+        trainset = torchvision.datasets.CIFAR100(root='./data/CIFAR-FS', train=True,
+                                        download=True)
+        self.images = trainset.data
+        self.label = trainset.targets
 
         self.num_class = len(set(self.label))
         self.label_trans = {j: i for i, j in enumerate(set(self.label))}
