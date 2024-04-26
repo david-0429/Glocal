@@ -78,6 +78,7 @@ def get_dataloader(args):
 
 def prepare_model(args, model):
     # load pre-trained model (no FC weights)
+    '''
     if args.init_weights is not None:
         model_dict = model.state_dict()
         if "mini-feat" not in args.init_weights:
@@ -98,7 +99,7 @@ def prepare_model(args, model):
                 p.requires_grad = False
             for p in model.slf_attn.parameters():
                 p.requires_grad = False
-
+    '''
     if torch.cuda.is_available():
         torch.backends.cudnn.benchmark = True
 
